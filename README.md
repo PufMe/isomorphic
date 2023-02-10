@@ -1,1 +1,1 @@
-# isomorphic
+отчет - docs/algosnuy.md
