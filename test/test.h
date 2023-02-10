@@ -7,3 +7,5 @@
 #define ISOMORPHIZM_TREE_TEST_H
 
 #endif //ISOMORPHIZM_TREE_TEST_H
+
+void RunTests();

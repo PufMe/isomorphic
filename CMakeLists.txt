@@ -1,7 +1,16 @@
-cmake_minimum_required(VERSION 3.24)
-project(isomorphizm_tree)
+cmake_minimum_required(VERSION 3.12)
+project(iso)
 
-set(CMAKE_CXX_STANDARD 14)
+set(SOURCE_EXE main.cpp)
 
-add_executable(isomorphizm_tree
-        main.cpp)
+include_directories(algorithm test)
+
+add_executable(main ${SOURCE_EXE})
+
+add_subdirectory(algorithm)
+add_subdirectory(test)
+
+
+target_link_libraries(main
+        TESTING
+        IsomorphismSource)
