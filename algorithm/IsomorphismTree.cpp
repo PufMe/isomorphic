@@ -80,12 +80,13 @@ vector<int> findTreeCenter(vector<vector<int>>& tree){
 }
 
 string encode(node& vertex){
+
     if (&vertex == nullptr){
         return "";
     }
 
     vector<string> labels;
-    for (node child : vertex.children){
+    for (node& child : vertex.children){
         labels.push_back(encode(child));
     }
 
@@ -112,7 +113,9 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
     vector<int> centerT1 = findTreeCenter(t1);
     vector<int> centerT2 = findTreeCenter(t2);
 
-    if(centerT2.size() == 1){
+    if(centerT1.size() != centerT2.size()){
+        return false;
+    }else if(centerT2.size() == 1){
         node rootedT1 = rootTree(t1, centerT1[0]);
         string encodeT1 = encode(rootedT1);
 

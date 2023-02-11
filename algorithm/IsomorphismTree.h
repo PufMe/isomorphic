@@ -19,3 +19,9 @@ struct node{
 };
 
 bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2);
+vector<vector<int>> arrConvert(vector<int>& tree);
+string encode(node& vertex);
+vector<int> findTreeCenter(vector<vector<int>>& tree);
+node rootTree(vector<vector<int>>& tree, int rootId);
+node createNode(vector<vector<int>>& tree, node& vertex);
+

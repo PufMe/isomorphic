@@ -10,7 +10,4 @@ add_executable(main ${SOURCE_EXE})
 add_subdirectory(algorithm)
 add_subdirectory(test)
 
-
-target_link_libraries(main
-        TESTING
-        IsomorphismSource)
+target_link_libraries(main algo test)

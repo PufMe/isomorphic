@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
-project(IsomorphismSource)
-include_directories(src)
+project(algo)
 
+include_directories(algorithm)
 
 set(SOURCE_LIB IsomorphismTree.cpp)
 
-add_library(IsomorphismSource STATIC ${SOURCE_LIB})
+add_library(algo STATIC ${SOURCE_LIB})
