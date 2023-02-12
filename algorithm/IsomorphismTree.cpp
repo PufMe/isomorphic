@@ -104,18 +104,24 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
         vector<bool> visitT2 (tree2.size(),0);
         vector<bool> visitT22 (tree2.size(),0);
 
+        visitT1[centerT1[1]] = 1;
+        visitT12[centerT1[0]] = 1;
+
+        visitT2[centerT2[1]] = 1;
+        visitT22[centerT2[0]] = 1;
+
         string encodeT1 = encode(t1, centerT1[0], visitT1);
         string encodeT12 = encode(t1, centerT1[1], visitT12);
 
         string encodeT2 = encode(t2, centerT2[0], visitT2);
         string encodeT22 = encode(t2, centerT2[1], visitT22);
 
+       // cout << encodeT1 << " " << encodeT12 << endl;
         if(encodeT1 == encodeT2 && encodeT12 == encodeT22){
             return true;
         }else if(encodeT1 == encodeT22 && encodeT2 == encodeT12){
             return true;
         }
-
     }
     return false;
 }
