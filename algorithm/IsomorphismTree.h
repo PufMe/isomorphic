@@ -8,20 +8,9 @@
 #endif //ISOMORPHIZM_TREE_ISOMORPHISMTREE_H
 #include <bits/stdc++.h>
 using namespace std;
-struct node{
-    int id;
-    node* parent;
-    vector<node> children;
-    node(int id, node* parent);
-    node(int data);
-
-    void addChildren(const vector<node>& nodes);
-};
 
 bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2);
-vector<vector<int>> arrConvert(vector<int>& tree);
-string encode(node& vertex);
-vector<int> findTreeCenter(vector<vector<int>>& tree);
-node rootTree(vector<vector<int>>& tree, int rootId);
-node createNode(vector<vector<int>>& tree, node& vertex);
 
+string encode(vector<vector<int>>& tree, int& vertex, vector<bool>& visit);
+vector<int> findTreeCenter(vector<vector<int>>& tree);
+vector<vector<int>> arrConvert(vector<int>& tree);

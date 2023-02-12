@@ -1,41 +1,9 @@
 //
 // Created by Admin on 10.02.2023.
 //
-
 #include "IsomorphismTree.h"
 
-node::node(int id, node *parent) {
-    this->id = id;
-    this->parent = parent;
-}
-
-node::node(int data) : node(data, nullptr){};
-
-void node::addChildren(const vector<node> &nodes) {
-    for (auto node : nodes){
-        children.push_back(node);
-    }
-}
-
-node createNode(vector<vector<int>>& tree, node& vertex){
-    for(int i: tree[vertex.id]){
-        if(vertex.parent != nullptr && i == vertex.parent->id){
-            continue;
-        }
-        node* child = new node(i, &vertex);
-        vertex.addChildren({*child});
-
-        createNode(tree,*child);
-    }
-    return vertex;
-}
-
-
-node rootTree(vector<vector<int>>& tree, int rootId){
-    node* root = new node(rootId);
-    return createNode(tree, *root);
-}
-
+//преобразовываем массив в список смежности
 vector<vector<int>> arrConvert(vector<int>& tree){
     vector<vector<int>> arr(tree.size());
     for(int i = 0; i < tree.size(); i++){
@@ -47,7 +15,7 @@ vector<vector<int>> arrConvert(vector<int>& tree){
     return arr;
 }
 
-
+//поиск цетра(ов) дерева
 vector<int> findTreeCenter(vector<vector<int>>& tree){
     int nodes_count = tree.size();
     vector<int> degree (nodes_count,0);
@@ -79,25 +47,29 @@ vector<int> findTreeCenter(vector<vector<int>>& tree){
     return leaves;
 }
 
-string encode(node& vertex){
+//сиреализуем дерево
+string encode(vector<vector<int>>& tree, int& vertex, vector<bool>& visit){
 
-    if (&vertex == nullptr){
+    if(visit[vertex]){
         return "";
     }
-
-    vector<string> labels;
-    for (node& child : vertex.children){
-        labels.push_back(encode(child));
+    visit[vertex] = true;
+    if(tree[vertex].size() == 1){
+        return "()";
     }
-
-    sort(labels.begin(),labels.end());
+    vector<string> label;
+    for(int i : tree[vertex]){
+        label.push_back(encode(tree, i, visit));
+    }
+    sort(label.begin(),label.end());
 
     string result = "";
-    for(string l: labels){
+    for(string l: label){
         result += l;
     }
-    return '(' + result + ')';
+    return "(" + result + ")";
 }
+
 
 bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
     if(tree1.size() == 0 && tree2.size() == 0){
@@ -116,28 +88,27 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
     if(centerT1.size() != centerT2.size()){
         return false;
     }else if(centerT2.size() == 1){
-        node rootedT1 = rootTree(t1, centerT1[0]);
-        string encodeT1 = encode(rootedT1);
+        vector<bool> visitT1 (tree1.size(),0);
+        vector<bool> visitT2 (tree2.size(),0);
 
-        node rootedT2 = rootTree(t2,centerT2[0]);
-        string encodeT2 = encode(rootedT2);
+        string encodeT1 = encode(t1, centerT1[0], visitT1);
+        string encodeT2 = encode(t2, centerT2[0], visitT2);
+
         if( encodeT1 == encodeT2){
             return true;
         }
     }else{
-        node rootedT1 = rootTree(t1, centerT1[0]);
-        string encodeT1 = encode(rootedT1);
+        vector<bool> visitT1 (tree1.size(),0);
+        vector<bool> visitT12 (tree1.size(),0);
 
-        node rootedT12 = rootTree(t1, centerT1[1]);
-        string encodeT12 = encode(rootedT12);
+        vector<bool> visitT2 (tree2.size(),0);
+        vector<bool> visitT22 (tree2.size(),0);
 
-        node rootedT2 = rootTree(t2,centerT2[0]);
-        string encodeT2 = encode(rootedT2);
+        string encodeT1 = encode(t1, centerT1[0], visitT1);
+        string encodeT12 = encode(t1, centerT1[1], visitT12);
 
-        node rootedT22 = rootTree(t2,centerT2[1]);
-        string encodeT22 = encode(rootedT22);
-
-
+        string encodeT2 = encode(t2, centerT2[0], visitT2);
+        string encodeT22 = encode(t2, centerT2[1], visitT22);
 
         if(encodeT1 == encodeT2 && encodeT12 == encodeT22){
             return true;
