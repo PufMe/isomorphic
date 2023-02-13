@@ -3,6 +3,5 @@
 #include "generatorTests.h"
 
 int main() {
-    //RunTests();
-    TimeIsom();
+    RunTests();
 }
