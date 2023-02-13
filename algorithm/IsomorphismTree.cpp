@@ -47,7 +47,7 @@ vector<int> findTreeCenter(vector<vector<int>>& tree){
     return leaves;
 }
 
-//сиреализуем дерево
+//сериализация дерева
 string encode(vector<vector<int>>& tree, int& vertex, vector<bool>& visit){
 
     if(visit[vertex]){
