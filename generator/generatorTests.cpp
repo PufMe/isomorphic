@@ -14,16 +14,6 @@ int RandomNumber(int a, int b){
     return dist(gen);
 }
 
-vector<int> GeneratorTree(int nodes_count){
-    vector<int> tree(nodes_count);
-    tree[0] = -1;
-    for(int i = 1; i < nodes_count; i++){
-        int parent = RandomNumber(0, i-1);
-        tree[i] = parent;
-    }
-    return tree;
-}
-
 vector<int> GeneratorTreeWithKey(int nodes_count, int key){
     vector<int> tree(nodes_count);
     tree[0] = -1;
@@ -33,23 +23,22 @@ vector<int> GeneratorTreeWithKey(int nodes_count, int key){
     }
     return tree;
 }
+
 vector<int> GenerateBamboo(int nodes_count){
     vector<int> tree(nodes_count);
     tree[0] = -1;
     for(int i = 1; i < nodes_count; i++){
-
         tree[i] = i-1;
     }
     return tree;
 }
 
 
-
 void TimeIsom(){
 
     for (int i = 1000; i < 1000000; i += 10000) {
-        vector<int> tree1 = GeneratorTree(i);
-        vector<int> tree2 = GeneratorTree(i);
+        vector<int> tree1 = GeneratorTreeWithKey(i, 1);
+        vector<int> tree2 = GeneratorTreeWithKey(i, 1);
         auto start = chrono::steady_clock::now();
         treesAreIsomorphic(tree1,tree2);
         auto end = chrono::steady_clock::now();

@@ -9,7 +9,6 @@ void Test1(){
     std::vector<int> tree1 = {-1, 0, 1, 2, 3, 3};
     std::vector<int> tree2 = {-1, 0, 0, 0, 1, 4};
 
-
     assert(treesAreIsomorphic(tree1,tree2));
     cout << "Test1: OK" << endl;
 }
@@ -61,7 +60,6 @@ void Test7(){
     assert(!treesAreIsomorphic(tree1,tree2));
     cout << "Test7: OK" << endl;
 }
-
 //Пустые вектора, 1
 void Test8() {
     std::vector<int> tree1(0);
@@ -94,7 +92,7 @@ void Test11() {
     assert(!treesAreIsomorphic(tree1,tree2));
     cout << "Test11: OK" << endl;
 }
-//тростник, 1
+//бамбук, 1
 void Test12() {
     std::vector<int> tree1 = {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
     std::vector<int> tree2 = {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 12, 13, 14, 15, 16, 17, 18, 19};

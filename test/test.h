@@ -6,7 +6,6 @@
 #ifndef ISOMORPHIZM_TREE_TEST_H
 #define ISOMORPHIZM_TREE_TEST_H
 
-
-
 void RunTests();
+
 #endif
