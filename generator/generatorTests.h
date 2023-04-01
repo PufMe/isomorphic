@@ -14,5 +14,7 @@ using namespace std;
 int RandomNumber(int a, int b);
 vector<int> GeneratorTree(int nodes_count);
 void TimeIsom();
+vector<int> GeneratorTreeWithKey(int nodes_count, int key);
+vector<int> GenerateBamboo(int nodes_count);
 
 #endif

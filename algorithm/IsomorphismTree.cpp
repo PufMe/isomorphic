@@ -95,28 +95,28 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
             return true;
         }
     }else{
-        vector<bool> visitT1 (tree1.size(),0);
+        vector<bool> visitT11 (tree1.size(),0);
         vector<bool> visitT12 (tree1.size(),0);
 
-        vector<bool> visitT2 (tree2.size(),0);
+        vector<bool> visitT21 (tree2.size(),0);
         vector<bool> visitT22 (tree2.size(),0);
 
-        visitT1[centerT1[1]] = 1;
+        visitT11[centerT1[1]] = 1;
         visitT12[centerT1[0]] = 1;
 
-        visitT2[centerT2[1]] = 1;
+        visitT21[centerT2[1]] = 1;
         visitT22[centerT2[0]] = 1;
 
-        string encodeT1 = encodeAHU(t1, centerT1[0], visitT1);
+        string encodeT11 = encodeAHU(t1, centerT1[0], visitT11);
         string encodeT12 = encodeAHU(t1, centerT1[1], visitT12);
 
-        string encodeT2 = encodeAHU(t2, centerT2[0], visitT2);
+        string encodeT21 = encodeAHU(t2, centerT2[0], visitT21);
         string encodeT22 = encodeAHU(t2, centerT2[1], visitT22);
 
        // cout << encodeT1 << " " << encodeT12 << endl;
-        if(encodeT1 == encodeT2 && encodeT12 == encodeT22){
+        if(encodeT11 == encodeT21 && encodeT12 == encodeT22){
             return true;
-        }else if(encodeT1 == encodeT22 && encodeT2 == encodeT12){
+        }else if(encodeT11 == encodeT22 && encodeT21 == encodeT12){
             return true;
         }
     }

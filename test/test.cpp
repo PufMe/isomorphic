@@ -57,11 +57,6 @@ void Test7(){
     std::vector<int> tree1 = {-1, 0, 0, 1, 3, 1, 5, 2, 2, 8, 7};
     std::vector<int> tree2 = {-1, 0, 0, 1, 3, 4, 1, 2, 2, 8, 7};
 
-    if(treesAreIsomorphic(tree1,tree2)){
-        cout << "Test7: isomorphic" << endl;
-    }else{
-        cout << "Test7: not isomorphic" << endl;
-    }
     assert(!treesAreIsomorphic(tree1,tree2));
     cout << "Test7: OK" << endl;
 }

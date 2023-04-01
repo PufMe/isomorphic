@@ -24,6 +24,27 @@ vector<int> GeneratorTree(int nodes_count){
     return tree;
 }
 
+vector<int> GeneratorTreeWithKey(int nodes_count, int key){
+    vector<int> tree(nodes_count);
+    tree[0] = -1;
+    for(int i = 1; i < nodes_count; i++){
+        int parent = RandomNumber(0, (i-1)/key);
+        tree[i] = parent;
+    }
+    return tree;
+}
+vector<int> GenerateBamboo(int nodes_count){
+    vector<int> tree(nodes_count);
+    tree[0] = -1;
+    for(int i = 1; i < nodes_count; i++){
+
+        tree[i] = i-1;
+    }
+    return tree;
+}
+
+
+
 void TimeIsom(){
 
     for (int i = 1000; i < 1000000; i += 10000) {
