@@ -4,15 +4,13 @@
 #include "IsomorphismTree.h"
 
 //преобразовываем массив в список смежности
-vector<vector<int>> arrConvert(vector<int>& tree){
-    vector<vector<int>> arr(tree.size());
-    for(int i = 0; i < tree.size(); i++){
-        if(tree[i] != -1){
-            arr[tree[i]].push_back(i);
-            arr[i].push_back(tree[i]);
-        }
+vector<vector<int>> arrConvertToList(vector<int>& tree){
+    vector<vector<int>> adjList(tree.size());
+    for(int i = 1; i < tree.size(); i++){
+        adjList[tree[i]].push_back(i);
+        adjList[i].push_back(tree[i]);
     }
-    return arr;
+    return adjList;
 }
 
 //поиск цетра(ов) дерева
@@ -43,12 +41,11 @@ vector<int> findTreeCenter(vector<vector<int>>& tree){
         leaves_count += new_leaves.size();
         leaves = new_leaves;
     }
-
     return leaves;
 }
 
 //сериализация дерева
-string encode(vector<vector<int>>& tree, int& vertex, vector<bool>& visit){
+string encodeAHU(vector<vector<int>>& tree, int& vertex, vector<bool>& visit){
 
     if(visit[vertex]){
         return "";
@@ -59,7 +56,7 @@ string encode(vector<vector<int>>& tree, int& vertex, vector<bool>& visit){
     }
     vector<string> label;
     for(int i : tree[vertex]){
-        label.push_back(encode(tree, i, visit));
+        label.push_back(encodeAHU(tree, i, visit));
     }
     sort(label.begin(),label.end());
 
@@ -79,8 +76,8 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
         return false;
     }
 
-    vector<vector<int>> t1 = arrConvert(tree1);
-    vector<vector<int>> t2 = arrConvert(tree2);
+    vector<vector<int>> t1 = arrConvertToList(tree1);
+    vector<vector<int>> t2 = arrConvertToList(tree2);
 
     vector<int> centerT1 = findTreeCenter(t1);
     vector<int> centerT2 = findTreeCenter(t2);
@@ -91,8 +88,8 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
         vector<bool> visitT1 (tree1.size(),0);
         vector<bool> visitT2 (tree2.size(),0);
 
-        string encodeT1 = encode(t1, centerT1[0], visitT1);
-        string encodeT2 = encode(t2, centerT2[0], visitT2);
+        string encodeT1 = encodeAHU(t1, centerT1[0], visitT1);
+        string encodeT2 = encodeAHU(t2, centerT2[0], visitT2);
 
         if( encodeT1 == encodeT2){
             return true;
@@ -110,11 +107,11 @@ bool treesAreIsomorphic(vector<int>& tree1, vector<int>& tree2){
         visitT2[centerT2[1]] = 1;
         visitT22[centerT2[0]] = 1;
 
-        string encodeT1 = encode(t1, centerT1[0], visitT1);
-        string encodeT12 = encode(t1, centerT1[1], visitT12);
+        string encodeT1 = encodeAHU(t1, centerT1[0], visitT1);
+        string encodeT12 = encodeAHU(t1, centerT1[1], visitT12);
 
-        string encodeT2 = encode(t2, centerT2[0], visitT2);
-        string encodeT22 = encode(t2, centerT2[1], visitT22);
+        string encodeT2 = encodeAHU(t2, centerT2[0], visitT2);
+        string encodeT22 = encodeAHU(t2, centerT2[1], visitT22);
 
        // cout << encodeT1 << " " << encodeT12 << endl;
         if(encodeT1 == encodeT2 && encodeT12 == encodeT22){
