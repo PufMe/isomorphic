@@ -9,6 +9,7 @@ void Test1(){
     std::vector<int> tree1 = {-1, 0, 1, 2, 3, 3};
     std::vector<int> tree2 = {-1, 0, 0, 0, 1, 4};
 
+
     assert(treesAreIsomorphic(tree1,tree2));
     cout << "Test1: OK" << endl;
 }
